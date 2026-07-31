@@ -314,6 +314,8 @@ const pantalla2 = document.getElementById("pantalla2");
 const pantalla3 = document.getElementById("pantalla3");
 
 const musica = document.getElementById("musica");
+console.log(musica);
+console.log(musica.src);
 
 const btnSi = document.getElementById("si");
 const btnNo = document.getElementById("no");
@@ -345,17 +347,12 @@ btnNo.style.top=y+"px";
 
 // ========= BOTÓN SI =========
 
-btnSi.onclick = function(){
+btnSi.onclick = async function () {
 
-    if(musica){
-        musica.volume = 1;
-        musica.currentTime = 0;
-
-        musica.play().then(() => {
-            console.log("Música iniciada");
-        }).catch(err => {
-            alert(err);
-        });
+    try{
+        await musica.play();
+    }catch(e){
+        console.log(e);
     }
 
     pantalla1.style.opacity="0";
@@ -474,8 +471,11 @@ alert("❤️ Gracias por existir.\n\nEres la mejor parte de mi vida.\n\nTe amo 
 
 </script>
 
-<audio id="musica" loop>
-    <source src="Los Auténticos Decadentes - Loco (Tu Forma De Ser) (Official Audio) (2).mp3" type="audio/mpeg">
+<audio
+    id="musica"
+    src="Los Auténticos Decadentes - Loco (Tu Forma De Ser) (Official Audio) (2).mp3"
+    preload="auto"
+    loop>
 </audio>
 
 </body>
